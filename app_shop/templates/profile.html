@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+    {% include "header.html" %}
+{% endblock header %}
+
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}?v=9"/>
+
+<div class="cart-total-tag">
+    <span>نام:</span>
+    <span class="total-amount">{{ user.first_name }}</span>
+</div>
+
+<div class="cart-total-tag">
+    <span>نام خانوادگی:</span>
+    <span class="total-amount">{{ user.last_name }}</span>
+</div>
+
+<div class="cart-total-tag">
+    <span>موجودی شما:</span>
+    <span class="total-amount">{{ balance }} تومان</span>
+</div>
+
+{% endblock body %}

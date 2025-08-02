@@ -1,0 +1,28 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}{% endblock header %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/comment.css' %}?v=7"/>
+
+<div class="comments-container">
+    {% for comment in com %}
+    <div class="comment-card {% if not comment.status %}inactive{% endif %}">
+      <div class="comment-header">
+        <span class="comment-user">{{ comment.user.first_name }}</span>
+        <span class="comment-time">{{ comment.time_create|date:"Y-m-d H:i" }}</span>
+      </div>
+      <div class="comment-body">
+        {{ comment.des|linebreaksbr }}
+      </div>
+    </div>
+    {% empty %}
+    <p>هیچ کامنتی وجود ندارد.</p>
+    {% endfor %}
+  </div>
+  
+
+{% endblock %}

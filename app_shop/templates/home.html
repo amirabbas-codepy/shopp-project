@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=9"/>
+<form method="POST" action="{% url 'serchtemp' %}" class="search-form-header">
+  {% csrf_token %}
+  {{ sf.as_p }}
+  <button type="submit">جستجو</button>
+</form>
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% include "header.html" %}
+{% endblock header %}
+
+{% block body %}
+
+<div class="product-list">
+  {% for product in products %}
+  <div class="product-card">
+    {% if product.pic %}
+      <img src="{{ product.pic.url }}" alt="{{ product.name }}" class="product-pic" />
+    {% else %}
+      <img src="{% static 'img/no-image.jpg' %}" alt="بدون تصویر" class="product-pic" />
+    {% endif %}
+
+    <div class="product-name">{{ product.name }}</div>
+    <div class="product-price">{{ product.price }} تومان</div>
+    
+    {% if product.status %}
+      <div class="product-status">فعال</div>
+    {% else %}
+      <div class="product-status inactive">غیرفعال</div>
+    {% endif %}
+
+    <div class="product-tag">
+      <a href="{% url 'detailstemp' product.id %}">مشاهده</a>
+    </div>
+    
+    <form method="POST" action="{% url 'selectproducttemp' product.id %}">
+      {% csrf_token %}
+      <button type="submit" class="product-post-btn">افزودن به سبد خرید</button>
+    </form>
+  </div>
+  {% empty %}
+    <p>هیچ محصولی یافت نشد.</p>
+  {% endfor %}
+</div>
+
+<script>
+  setTimeout(() => {
+    const messages = document.querySelector('.messages');
+    if (messages) {
+      messages.style.transition = 'opacity 0.5s ease';
+      messages.style.opacity = '0';
+      setTimeout(() => messages.remove(), 500);
+    }
+  }, 3000);
+</script>
+
+{% endblock body %}
+

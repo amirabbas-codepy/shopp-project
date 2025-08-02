@@ -1,0 +1,53 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% include "header.html" %}
+{% endblock header %}
+
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}?v=7"/>
+
+{% for item in shoppingcart %}
+    <div class="cart-item">
+        <div class="product-info">
+        <h4 class="product-name">{{ item.product.name }}</h4>
+        <p class="product-price">{{ item.product.price }} تومان</p>
+        </div>
+        <div class="product-count-form">
+        <span class="count-label">تعداد: {{ item.count }}</span>
+        <form method="POST" action="{% url 'deleteselectedtemp' item.product.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-trash" title="حذف محصول"></button>
+        </form>
+        <form method="POST" action="{% url 'selectproducttemp' item.product.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-add" title="هفزودن محصول"></button>
+        </form>
+        </div>
+    </div>
+
+{% endfor %}
+
+<div class="cart-total-tag">
+    <span>مبلغ نهایی:</span>
+    <span class="total-amount">{{ price }} تومان</span>
+</div>
+
+<div class="cart-total-tag">
+    <span>موجودی شما:</span>
+    <span class="total-amount">{{ balance }} تومان</span>
+</div>
+
+{% endblock body %}

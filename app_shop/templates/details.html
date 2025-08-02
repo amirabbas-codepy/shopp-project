@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}{% endblock header %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/details.css' %}?v=7"/>
+
+<div class="product-card">
+  {% if product.pic %}
+    <img src="{{ product.pic.url }}" alt="{{ product.name }}" class="product-pic" />
+  {% endif %}
+
+  <h2 class="product-name">{{ product.name }}</h2>
+
+  <div class="product-category"><strong>دسته بندی:</strong> {{ product.cat.name }}</div>
+
+  {% if product.brand %}
+  <div class="product-brand"><strong>برند:</strong> {{ product.brand }}</div>
+  {% endif %}
+
+  <div class="product-price">قیمت: {{ product.price }} تومان</div>
+
+  <div class="product-description">{{ product.descripitions }}</div>
+
+  <div class="product-time">تاریخ ایجاد: {{ product.time_create }}</div>
+
+  {% if product.status %}
+    <div class="product-status">فعال</div>
+  {% else %}
+    <div class="product-status inactive">غیرفعال</div>
+  {% endif %}
+
+  <form method="POST" action="{% url 'selectproducttemp' product.id %}">
+    {% csrf_token %}
+    <button type="submit" class="product-post-btn">افزودن به سبد خرید</button>
+  </form>
+
+  <form method="POST" action="{% url 'commenttemp' product.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit", value="send">
+  </form>
+  <a href="{% url "showcommenttemp" product.id %}" class="tag-link">مشاهده نظرات</a>
+
+</div>
+
+{% endblock body %}

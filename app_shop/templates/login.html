@@ -1,0 +1,22 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}?v=7"/>
+    <form action="", method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit", value="Login">
+    </form>
+    
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+{% endblock body %}
