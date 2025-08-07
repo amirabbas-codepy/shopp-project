@@ -13,11 +13,13 @@
     </ul>
     {% endif %}
     {% include "header.html" %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
 {% endblock header %}
 
 
 {% block body %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}?v=7"/>
+<link rel="stylesheet" href="{% static 'css/shoppingcart.css' %}?v=8"/>
 
 {% for item in shoppingcart %}
     <div class="cart-item">
@@ -38,10 +40,6 @@
         </div>
     </div>
     {% endfor %}
-    <form method="POST" action="{% url 'finalregistertemp' %}">
-        {% csrf_token %}
-        <button type="submit" title="ثبت نهایی">ثبت نهایی</button>
-    </form>
 
 <div class="cart-total-tag">
     <span>مبلغ نهایی:</span>
@@ -52,5 +50,10 @@
     <span>موجودی شما:</span>
     <span class="total-amount">{{ balance }} تومان</span>
 </div>
+<br>
+<form method="POST" action="{% url 'finalregistertemp' %}">
+    {% csrf_token %}
+    <button type="submit" title="ثبت نهایی" class="product-post-btn">ثبت نهایی</button>
+</form>
 
 {% endblock body %}

@@ -125,6 +125,7 @@ def shopping_cart(request):
                                                                           'price':f'{final_price:,}', 
                                                                           'balance':f'{request.user.balance:,}'})
 
+@login_required(login_url='/shoptemp/logintemp/')
 def comment_view(request, idp3):
     user = request.user
     print(user)
@@ -159,7 +160,8 @@ def show_comments(request, idp4):
     else:
         comments = Comment.objects.filter(product=product, status=True)
         return render(request=request, template_name='comments.html', context={'com':comments})
-    
+
+@login_required(login_url='/shoptemp/logintemp/')
 def delete_selected_product(request, idp5):
     user = request.user
     print(user)
@@ -192,12 +194,13 @@ def serch_product(request):
             else:
                 products = Product.objects.filter(Q(name__icontains=value) | Q(brand__icontains=value))
                 if products:
-                    return render(request=request, template_name='home.html', context={'products':products})
+                    return render(request=request, template_name='home.html', context={'products':products, 'sf':SerchForm()})
                 else:
                     messages.error(request=request, message='کالا مورد نظر یافت نشد')
                     return redirect(home_view) 
     return redirect(home_view)
 
+@login_required(login_url='/shoptemp/logintemp/')
 def final_shopping_cart_registarion(request):
     if request.method == 'POST':
         user = request.user
@@ -210,7 +213,7 @@ def final_shopping_cart_registarion(request):
 
             if user.balance >= final_price:
                 for pr in shopping_carts:
-                    FinalRegistraion.objects.create(product=pr.product, user=user)
+                    FinalRegistraion.objects.create(product=pr.product, user=user, count=pr.count)
                 SelectedPruduct.objects.filter(user=user).delete()
                 
                 user.balance -= final_price
@@ -224,6 +227,7 @@ def final_shopping_cart_registarion(request):
         return redirect(shopping_cart)
     return redirect(home_view)
 
+@login_required(login_url='/shoptemp/logintemp/')
 def edit_adress(request):
     if request.method == 'POST':
         form_data = EditAdressForm(request.POST)
@@ -240,6 +244,7 @@ def edit_adress(request):
             return redirect(home_view)
     return redirect(profile)
 
+@login_required(login_url='/shoptemp/logintemp/')
 def deleted_account(request):
     user = request.user
     user.delete()

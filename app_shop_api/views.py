@@ -221,7 +221,8 @@ def details_product(request, idp):
     else:
         ps = ProductSerializer(product)
         return Response(ps.data, status=status.HTTP_200_OK)
-        
 
-def deposit(request):
-    pass
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def profile(request):
+    return Response({'user':request.user}, status=status.HTTP_200_OK)

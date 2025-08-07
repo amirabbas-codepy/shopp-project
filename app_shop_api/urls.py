@@ -19,4 +19,5 @@ urlpatterns = [
     path('final/', final_shopping_cart_registarion, name='final'),
     path('sfr/', show_final_registarions, name='sfr'),
     path('details/<int:idp>', details_product, name='details'),
+    path('profile/', profile, name='profile'),
 ]

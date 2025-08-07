@@ -153,4 +153,27 @@ form select:focus {
   z-index: 999;
 }
 
+a {
+  color: #dc3545;            /* رنگ قرمز جذاب */
+  text-decoration: none;     /* حذف خط زیر لینک */
+  font-weight: bold;
+  padding: 6px 12px;
+  border: 2px solid #dc3545;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  display: inline-block;     /* تا padding و border بهتر بشه */
+  font-size: 15px;
+  user-select: none;
+}
+
+a:hover,
+a:focus {
+  background-color: #dc3545; /* پر کردن رنگ در هاور */
+  color: white;              /* رنگ متن سفید */
+  text-decoration: none;
+  outline: none;
+}
+
+
 

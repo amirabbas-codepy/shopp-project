@@ -1,0 +1,207 @@
+
+/* profile.css */
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.cart-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.product-price {
+    font-size: 1rem;
+    color: #777;
+    margin-top: 8px;
+}
+
+.product-count-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.count-label {
+    font-size: 0.9rem;
+    margin-left: 10px;
+    color: #444;
+}
+
+.btn-trash, .btn-add {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: color 0.3s ease;
+    padding: 6px;
+    border-radius: 50%;
+}
+
+.btn-trash i, .btn-add i {
+    pointer-events: none;
+}
+
+.btn-trash {
+    color: #dc3545;
+}
+
+/* دکمه حذف */
+.btn-trash {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #dc3545;
+    padding: 6px 10px;
+    border-radius: 50%;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* آیکون سطل زباله با ::before */
+.btn-trash::before {
+    content: "\f2ed"; /* کد یونیکد آیکون trash-alt در فونت Font Awesome */
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; /* برای Solid */
+    font-style: normal;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* تا کلیک به خود دکمه بخوره */
+}
+
+/* هاور دکمه حذف */
+.btn-trash:hover {
+    color: #a71d2a;
+    background-color: #ffe6e6;
+}
+
+/* دکمه افزودن */
+.btn-add {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #28a745;
+    padding: 6px 10px;
+    border-radius: 50%;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+
+.btn-add::before {
+    content: "\f055"; 
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900; 
+    font-style: normal;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+
+.btn-add:hover {
+    color: #1c7c35;
+    background-color: #e6ffee;
+}
+
+.cart-total-tag {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.total-amount {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.product-post-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 25px;
+    display: block;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.product-post-btn:hover {
+    background-color: #0056b3;
+}
+
+.messages {
+    list-style: none;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.messages li {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+}
+
+.messages li.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.messages li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+@media (max-width: 600px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-count-form {
+        margin-top: 10px;
+    }
+
+    .product-post-btn {
+        font-size: 0.95rem;
+    }
+}
+
