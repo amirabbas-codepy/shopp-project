@@ -14,4 +14,5 @@ urlpatterns = [
     path('deleteselectedtemp/<int:idp5>/', delete_selected_product, name='deleteselectedtemp'),
     path('serchtemp/', serch_product, name='serchtemp'),
     path('shoppingcarttemp/', shopping_cart, name='shoppingcarttemp'),
+    path('finalregistertemp/', final_shopping_cart_registarion, name='finalregistertemp'),
 ]

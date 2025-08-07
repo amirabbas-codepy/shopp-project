@@ -33,12 +33,15 @@
         </form>
         <form method="POST" action="{% url 'selectproducttemp' item.product.id %}">
             {% csrf_token %}
-            <button type="submit" class="btn-add" title="هفزودن محصول"></button>
+            <button type="submit" class="btn-add" title="افزودن محصول"></button>
         </form>
         </div>
     </div>
-
-{% endfor %}
+    {% endfor %}
+    <form method="POST" action="{% url 'finalregistertemp' %}">
+        {% csrf_token %}
+        <button type="submit" title="ثبت نهایی">ثبت نهایی</button>
+    </form>
 
 <div class="cart-total-tag">
     <span>مبلغ نهایی:</span>

@@ -196,3 +196,29 @@ def serch_product(request):
                     messages.error(request=request, message='کالا مورد نظر یافت نشد')
                     return redirect(home_view) 
     return redirect(home_view)
+
+def final_shopping_cart_registarion(request):
+    if request.method == 'POST':
+        user = request.user
+
+        shopping_carts = SelectedPruduct.objects.filter(user=user)
+        if shopping_carts:
+            final_price = 0
+            for product in shopping_carts:
+                final_price += product.product.price * product.count
+
+            if user.balance >= final_price:
+                for pr in shopping_carts:
+                    FinalRegistraion.objects.create(product=pr.product, user=user)
+                SelectedPruduct.objects.filter(user=user).delete()
+                
+                user.balance -= final_price
+                user.save()
+
+                return redirect(profile)
+            else:
+                messages.error(request=request, message='موجودی کافی نیست')
+                return redirect(shopping_cart)
+        messages.error(request=request, message='سبد خرید خالی است')
+        return redirect(shopping_cart)
+    return redirect(home_view)
