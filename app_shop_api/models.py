@@ -48,3 +48,4 @@ class FinalRegistraion(models.Model):
     time_create = jmodels.jDateTimeField(auto_now_add=True)
     time_update = jmodels.jDateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
+    count = models.IntegerField(null=True)
