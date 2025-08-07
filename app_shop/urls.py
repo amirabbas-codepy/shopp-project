@@ -15,4 +15,7 @@ urlpatterns = [
     path('serchtemp/', serch_product, name='serchtemp'),
     path('shoppingcarttemp/', shopping_cart, name='shoppingcarttemp'),
     path('finalregistertemp/', final_shopping_cart_registarion, name='finalregistertemp'),
+    path('editadrtemp/', edit_adress, name='editadrtemp'),
+    path('deltemp/', deleted_account, name='deltemp'),
+
 ]

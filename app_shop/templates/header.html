@@ -8,7 +8,7 @@
 <nav class="nav-bar">
     <a href="{% url "hometemp" %}" class="nav-link">خانه</a>
     <a href="{% url "shoppingcarttemp" %}" class="nav-link">سبد خرید</a>
-    {% if user.is_authenticated %}
+    {% if not user.is_authenticated %}
         <a href="{% url "logintemp" %}" class="nav-link">ورود یا ثبت نام</a>
     {% endif %}
     <a href="{% url "profiletemp" %}" class="nav-link">پروفایل</a>

@@ -109,7 +109,8 @@ def seletc_product_view(request, idp2):
 
 @login_required(login_url='/shoptemp/logintemp/')
 def profile(request):
-    return render(request=request, template_name='profile.html', context={'user':request.user, 'balance':f'{request.user.balance:,}'}) 
+    f = FinalRegistraion.objects.filter(user=request.user)
+    return render(request=request, template_name='profile.html', context={'user':request.user, 'balance':f'{request.user.balance:,}', 'final':f, 'form':EditAdressForm()}) 
 
 @login_required(login_url='/shoptemp/logintemp/')
 def shopping_cart(request):
@@ -214,11 +215,33 @@ def final_shopping_cart_registarion(request):
                 
                 user.balance -= final_price
                 user.save()
-
+                messages.success(request=request, message='سفارش شما با موفقیت ثبت و برای فروشنده ارسال شد')
                 return redirect(profile)
             else:
                 messages.error(request=request, message='موجودی کافی نیست')
                 return redirect(shopping_cart)
         messages.error(request=request, message='سبد خرید خالی است')
         return redirect(shopping_cart)
+    return redirect(home_view)
+
+def edit_adress(request):
+    if request.method == 'POST':
+        form_data = EditAdressForm(request.POST)
+        if form_data.is_valid():
+            data = form_data.cleaned_data
+            adress = data.get('adr')
+            user = request.user
+
+            user.adress = adress
+            user.save()
+            return redirect(profile)
+        else:
+            messages.error(request=request, message='error')
+            return redirect(home_view)
+    return redirect(profile)
+
+def deleted_account(request):
+    user = request.user
+    user.delete()
+    messages.success(request=request, message='حساب حذف شد')
     return redirect(home_view)

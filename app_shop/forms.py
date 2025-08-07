@@ -18,3 +18,6 @@ class CommentForm(forms.Form):
 
 class SerchForm(forms.Form):
     value = forms.CharField(max_length=200)
+
+class EditAdressForm(forms.Form):
+    adr = forms.CharField(required=True, widget=forms.Textarea())
