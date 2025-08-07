@@ -165,14 +165,14 @@ def delete_selected_product(request, idp5):
 
     try:
         product = Product.objects.get(id=idp5)
-        shopping_cart = SelectedPruduct.objects.get(user=user, product=product)
+        shopping_carts = SelectedPruduct.objects.get(user=user, product=product)
         
-        shopping_cart.count -= 1
-        if shopping_cart.count == 0:
-            shopping_cart.delete()
+        shopping_carts.count -= 1
+        if shopping_carts.count == 0:
+            shopping_carts.delete()
             return redirect(shopping_cart)
         else:
-            shopping_cart.save()
+            shopping_carts.save()
             return redirect(shopping_cart)
 
     except:   
